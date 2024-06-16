@@ -3,22 +3,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
     <groupId>com.bc</groupId>
-    <artifactId>page-watch</artifactId>
+    <artifactId>page-watch-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
 
     <name>page-watch</name>
     <description>Retrieve and compare webpages according to a schedule</description>
 
+    <modules>
+        <module>page-watch-service</module>
+        <module>page-watch-service-test</module>
+    </modules>
+
     <properties>
         <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+
+        <lombok.version>1.18.32</lombok.version>
+        <spring.boot.version>3.3.0</spring.boot.version>
     </properties>
 
 
@@ -26,11 +31,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
 
         <dependency>
@@ -38,18 +45,6 @@
             <artifactId>selenium-java</artifactId>
             <version>4.0.0</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.opencv</groupId>-->
-<!--            <artifactId>opencv</artifactId>-->
-<!--            <version>4.10.0</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>org.opencv</groupId>-->
-<!--            <artifactId>opencv-java</artifactId>-->
-<!--            <version>3.2.0</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.openpnp</groupId>
@@ -60,6 +55,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -69,6 +65,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
                 <configuration>
                     <excludes>
                         <exclude>

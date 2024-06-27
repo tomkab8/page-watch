@@ -29,7 +29,7 @@ public class ChangeDetectionSteps {
     }
 
 
-    @Then("the new version of the web page is compared against older verisions")
+    @Then("the new version of the web page is compared against older versions")
     public void compareWebPages() {
 
     }

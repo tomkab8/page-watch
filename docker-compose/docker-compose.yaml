@@ -1,1 +1,33 @@
+version: '3.1'
+
 services:
+
+  postgres:
+    image: 'postgres:12-alpine'
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: fitness
+    ports:
+      - "5432:5432"
+    volumes:
+      - 'postgres_data:/var/lib/postgresql/data'
+
+
+  localstack:
+    image: 'localstack/localstack:s3-latest'
+    environment:
+      - DEFAULT_REGION=eu-central-1
+      - SERVICES=sqs
+      - DATA_DIR=/tmp/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    ports:
+      - "4566:4566"
+    volumes:
+      - /tmp/localstack:/tmp/localstack
+      - ./config/localstack/sqs/setup-local-env.sh:/docker-entrypoint-initaws.d/setup-local-env.sh
+
+
+volumes:
+  postgres_data:
+  localstack_data:

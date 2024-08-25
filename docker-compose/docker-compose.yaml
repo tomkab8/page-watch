@@ -5,9 +5,9 @@ services:
   postgres:
     image: 'postgres:12-alpine'
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: fitness
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: pagewatchdb
     ports:
       - "5432:5432"
     volumes:
@@ -15,17 +15,33 @@ services:
 
 
   localstack:
-    image: 'localstack/localstack:s3-latest'
+    container_name: localstack
+    image: 'localstack/localstack:3.6.0'
     environment:
-      - DEFAULT_REGION=eu-central-1
-      - SERVICES=sqs
-      - DATA_DIR=/tmp/localstack/data
-      - DOCKER_HOST=unix:///var/run/docker.sock
+      - SERVICES=s3
+      - HOSTNAME=localstack
     ports:
       - "4566:4566"
+      - "8080:8080"
+#    volumes:
+#      - ./localstack:/tmp/localstack
+
+
+  s3-setup:
+    image: amazon/aws-cli
+    depends_on:
+      - localstack
     volumes:
-      - /tmp/localstack:/tmp/localstack
-      - ./config/localstack/sqs/setup-local-env.sh:/docker-entrypoint-initaws.d/setup-local-env.sh
+      - ./testbucket:/aws
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    entrypoint: /bin/sh -c
+    command: >
+      "
+        sleep 10 &&
+        aws --endpoint-url=http://localstack:4566 s3api create-bucket --bucket images
+      "
 
 
 volumes:

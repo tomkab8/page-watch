@@ -6,9 +6,10 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="INFO">
+        <Root level="DEBUG">
             <AppenderRef ref="console"/>
         </Root>
         <logger name="com.bc.pagewatch" level="INFO"/>
+        <logger name="org.springframework" level="TRACE"/>
     </Loggers>
 </Configuration>

@@ -27,9 +27,10 @@ public class SnapshotController {
 
     @GetMapping("/compare")
     public String compareSnapshots(
-            @RequestParam String imagePath1, @RequestParam String imagePath2, @RequestParam String diffImagePath
+            @RequestParam String oldImagePath, @RequestParam String newImagePath, @RequestParam String diffImagePath
+
     ) {
-        imageComparisonService.compareImages(imagePath1, imagePath2, diffImagePath);
+        imageComparisonService.compareImages(oldImagePath, newImagePath, diffImagePath);
 
         return "Comparison done and diff image saved to " + diffImagePath;
     }

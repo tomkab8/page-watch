@@ -2,7 +2,7 @@
 <Configuration status="INFO">
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="$d{ISO8601}{UTC} %m %n"/>
+            <PatternLayout pattern="%d{ISO8601}{UTC} %p th=&quot;%t&quot; lg=%c{1.} %m %n"/>
         </Console>
     </Appenders>
     <Loggers>
@@ -10,6 +10,6 @@
             <AppenderRef ref="console"/>
         </Root>
         <logger name="com.bc.pagewatch" level="INFO"/>
-        <logger name="org.springframework" level="INFO"/>
+<!--        <logger name="org.springframework" level="INFO"/>-->
     </Loggers>
 </Configuration>

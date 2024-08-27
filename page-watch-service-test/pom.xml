@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>page-watch-service-test</artifactId>
-    <version>${parent.version}</version>
+    <version>${project.parent.version}</version>
 
     <name>page-watch-service-test</name>
     <description>Page Watch service tests</description>
